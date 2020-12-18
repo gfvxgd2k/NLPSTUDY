@@ -3,8 +3,8 @@ import torch.nn as nn
 import torch.optim as optim
 import numpy as np
 
-n_hidden = 35
-lr = 0.01
+n_hidden = 45
+lr = 0.001
 epochs = 1000
 
 string = "hello pytorch. how long can a rnn cell remember"
@@ -59,7 +59,7 @@ print(one_hot)
 for i in range(epochs):
     rnn.zero_grad() #init grad 0
     total_loss = 0
-    hidden = rnn.init_hidden()
+    hidden = rnn.init_hidden() #학습을 위해 0으로 초기화
 
     for j in range(one_hot.size()[0] - 1):
         input_ = one_hot[j:j+1,:]
@@ -74,4 +74,17 @@ for i in range(epochs):
     optimizer.step()
 
     if i % 10 == 0:
-        print(total_loss)
+        print(i, total_loss)
+
+start = torch.zeros(1,len(char_list))
+start[:-2] = 1
+
+with torch.no_grad():
+    hidden = rnn.init_hidden()
+    input_ = start
+    output_string = ""
+    for i in range(len(string)):
+        output, hidden = rnn.forward(input_, hidden)
+        output_string += onehot_toword(output.data)
+        input_ = output
+print(output_string)
