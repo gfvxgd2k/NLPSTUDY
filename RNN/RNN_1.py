@@ -8,7 +8,7 @@ lr = 0.001
 epochs = 1000
 
 string = "hello pytorch. how long can a rnn cell remember"
-chars = "abcdefghijklmnopqrstuvwxyz ?!.<:;01"
+chars = "abcdefghijklmnopqrstuvwxyz ?!.:;01"
 char_list = [i for i in chars]
 n_letters = len(char_list)
 
@@ -56,6 +56,7 @@ optimizer = torch.optim.Adam(rnn.parameters(), lr = lr) # torch.parameters() 모
 
 one_hot = torch.from_numpy(string_to_onehot(string)).type_as(torch.FloatTensor()) # Tensor()와 다르게 numpy array도 변경됨
 print(one_hot)
+#train
 for i in range(epochs):
     rnn.zero_grad() #init grad 0
     total_loss = 0
@@ -79,6 +80,7 @@ for i in range(epochs):
 start = torch.zeros(1,len(char_list))
 start[:-2] = 1
 
+#test
 with torch.no_grad():
     hidden = rnn.init_hidden()
     input_ = start
