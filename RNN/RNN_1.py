@@ -7,7 +7,7 @@ n_hidden = 45
 lr = 0.001
 epochs = 1000
 
-string = "hello pytorch. how long can a rnn cell remember"
+string = "hi my name is kyuhong! nice meet u"
 chars = "abcdefghijklmnopqrstuvwxyz ?!.:;01"
 char_list = [i for i in chars]
 n_letters = len(char_list)
