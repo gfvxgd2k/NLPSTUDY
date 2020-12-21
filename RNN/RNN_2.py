@@ -1,3 +1,4 @@
+#pred sentence 2
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -21,7 +22,7 @@ y_data = [[1,0,2,3,3,4]]
 X = torch.FloatTensor(x_onehot)
 Y = torch.LongTensor(y_data)
  """
-sample = "if you want you"
+sample = "if you want you i want icecream"
 #dictionary
 char_set = list(set(sample)) #중복 문자 제거
 char_dic = {c: i for i, c in enumerate(char_set)}
@@ -48,7 +49,7 @@ rnn = nn.RNN(input_size, hidden_size, batch_first=True) # batch를 첫 아웃풋
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(rnn.parameters(), learning_rate) # torch.parameters() 모델의 매개변수, weights, bias
 
-for i in range(100):
+for i in range(1000):
     optimizer.zero_grad() # 초기화를 하지않으면 이전 기울기가 지속적으로 축적됨
     outputs, _status = rnn(X)
     loss = criterion(outputs.view(-1, input_size), Y.view(-1))
