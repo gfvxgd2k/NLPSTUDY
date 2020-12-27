@@ -70,7 +70,6 @@ class Encoder(nn.Module):
     def fowrard(self, src):
 
         embedded = self.dropout(self.embedding(src))
-
         outputs, (hidden, cell)= self.rnn(embedded)
 
         return hidden, cell
